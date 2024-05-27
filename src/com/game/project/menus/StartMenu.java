@@ -1,25 +1,20 @@
 package com.game.project.menus;
 
+import com.game.project.entities.Register;
+
 import java.util.Scanner;
 
 public class StartMenu implements Menu{
 
-    /*
-    private CartMenu cartMenu;
-    private LibraryMenu libraryMenu;
-    private GameStoreMenu gameStoreMenu;
+    private final GameStoreMenu gameStoreMenu;
+    private final CartMenu cartMenu;
+    private final LibraryMenu libraryMenu;
 
-    public StartMenu(){
-
-    }
-
-    public StartMenu(CartMenu cartMenu, LibraryMenu libraryMenu, GameStoreMenu gameStoreMenu){
+    public StartMenu(Register register, CartMenu cartMenu, LibraryMenu libraryMenu) {
+        this.gameStoreMenu = new GameStoreMenu(register);
         this.cartMenu = cartMenu;
         this.libraryMenu = libraryMenu;
-        this.gameStoreMenu = gameStoreMenu;
     }
-
-     */
 
     @Override
     public void show(){
@@ -31,27 +26,27 @@ public class StartMenu implements Menu{
             System.out.println("3. Biblioteca");
             System.out.println("4. Sair");
 
-            System.out.print("Digite a opcao desejada: ");
+            System.out.print("Digite a opcão desejada: ");
             int choice = sc.nextInt();
             sc.nextLine();
+            System.out.println();
 
             switch (choice){
                 case 1:
-                    //gameStoreMenu.show();
+                    gameStoreMenu.show();
                     break;
                 case 2:
-                    //cartMenu.show();
+                    cartMenu.show();
                     break;
                 case 3:
-                   //libraryMenu.show();
+                   libraryMenu.show();
                     break;
                 case 4:
-                    System.out.println("Obrigado por visitar a nossa loja!");
+                    System.out.println("\nObrigado por visitar a nossa loja!\n");
                     return;
                 default:
-                    System.out.println("Opcao invalida. Tente novamente.");
+                    System.out.println("\nOpcão inválida. Tente novamente.\n");
             }
         }
     }
-
 }

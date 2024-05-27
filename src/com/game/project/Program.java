@@ -1,19 +1,36 @@
 package com.game.project;
 
-import java.util.List;
-import com.game.project.entities.Buy;
-import com.game.project.entities.Category;
-import com.game.project.entities.Game;
-import com.game.project.entities.Library;
-import com.game.project.entities.Product;
+import com.game.project.entities.*;
+import com.game.project.menus.*;
 
-import com.game.project.menus.StartMenu;
+import java.util.Collections;
+
+import static com.game.project.entities.Category.*;
+
 
 public class Program {
 	
 	public static void main(String[] args) {
 
-		StartMenu startMenu = new StartMenu();
+		// Criando os objetos (library usando o padrão Singleton)
+		Register register = new Register();
+		Cart cart = new Cart();
+		Library library = Library.getInstance();
+
+		// Adicionando alguns jogos apenas para teste
+		Game game1 = new Game("Rimworld", 59.99, "Slavery", Collections.singletonList(SANDBOX), "Tynan", "Ludeon");
+		register.insertGame(game1);
+
+		Game game2 = new Game("CSGO", 79.99, "Boludo", Collections.singletonList(FPS), "Gabe", "Valve");
+		register.insertGame(game2);
+
+		// Criando os menus
+		CartMenu cartMenu = new CartMenu(register, cart, library);
+		GameStoreMenu gameStoreMenu = new GameStoreMenu(register);
+		LibraryMenu libraryMenu = new LibraryMenu(library);
+		StartMenu startMenu = new StartMenu(register, cartMenu, libraryMenu);
+
+		// Mostrando o menu inicial
 		startMenu.show();
 	}
 }
